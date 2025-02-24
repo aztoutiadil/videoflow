@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoFlow - AI-Powered Video Downloads & Transcription</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <style>
+        .pricing-section {
+            padding: 50px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .pricing-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .pricing-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        .pricing-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #007BFF;
+        }
+        .pricing-card .price {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+        .pricing-card ul li {
+            margin-bottom: 10px;
+            color: #666;
+        }
+        .pricing-card button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .pricing-card button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress"></div>
+    
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">
+                
+                VideoFlow
+            </a>
+            
+            <button class="navbar-toggle" onclick="toggleMenu()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="navbar-menu">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#how-to" class="nav-link">How It Works</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <div class="auth-buttons">
+                    <button class="nav-btn login" onclick="openAuthModal('login')">Sign In</button>
+                    <button class="nav-btn signup" onclick="openAuthModal('register')">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.querySelector('.navbar-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const menu = document.querySelector('.navbar-menu');
+                menu.classList.remove('active');
+            });
+        });
+    </script>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content animate-fade-in">
+                    <h1 class="hero-title">
+                        Transform Your Videos with
+                        <span class="gradient-text">AI-Powered</span>
+                        Technology
+                    </h1>
+                    <p class="hero-subtitle">
+                        Download, transcribe, and enhance your videos with cutting-edge AI technology.
+                        Experience seamless video processing with just a few clicks.
+                    </p>
+                    <div class="hero-actions">
+                        <div class="url-input-container">
+                            <input type="text" id="video-url" placeholder=" " class="url-input">
+                            <label for="video-url">Enter Video URL</label>
+                            <button class="btn btn-primary process-btn" onclick="processVideo()">
+                                <span class="btn-text">Process Video</span>
+                                <span class="btn-icon">→</span>
+                            </button>
+                        </div>
+                        <p class="supported-platforms">
+                            Supports: 
+                            <span class="platform">YouTube</span>
+                            <span class="platform">Vimeo</span>
+                            <span class="platform">Facebook</span>
+                            <span class="platform">Instagram</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="hero-image animate-fade-in">
+                    <div class="feature-preview">
+                        <div class="preview-window">
+                            <div class="window-controls">
+                                <span class="control close"></span>
+                                <span class="control minimize"></span>
+                                <span class="control maximize"></span>
+                            </div>
+                            <div class="preview-content">
+                                <div class="processing-animation">
+                                    <div class="wave"></div>
+                                    <div class="wave"></div>
+                                    <div class="wave"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Powerful Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card animate-fade-in">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Fast Downloads</h3>
+                        <p>Download videos in multiple formats and qualities with lightning-fast speeds.</p>
+                    </div>
+                    
+                    <div class="feature-card animate-fade-in">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 9V5C14 4.46957 13.7893 3.96086 13.4142 3.58579C13.0391 3.21071 12.5304 3 12 3H5C4.46957 3 3.96086 3.21071 3.58579 3.58579C3.21071 3.96086 3 4.46957 3 5V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H12C12.5304 21 13.0391 20.7893 13.4142 20.4142C13.7893 20.0391 14 19.5304 14 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7 7H10M7 11H10M7 15H10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M17 9L21 12L17 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>AI Transcription</h3>
+                        <p>Get accurate transcriptions powered by advanced AI technology.</p>
+                    </div>
+                    
+                    <div class="feature-card animate-fade-in">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M19.4 15C19.2669 15.3016 19.2272 15.6362 19.286 15.9606C19.3448 16.285 19.4995 16.5843 19.73 16.82L19.79 16.88C19.976 17.0657 20.1235 17.2863 20.2241 17.5291C20.3248 17.7719 20.3766 18.0322 20.3766 18.295C20.3766 18.5578 20.3248 18.8181 20.2241 19.0609C20.1235 19.3037 19.976 19.5243 19.79 19.71C19.6043 19.896 19.3837 20.0435 19.1409 20.1441C18.8981 20.2448 18.6378 20.2966 18.375 20.2966C18.1122 20.2966 17.8519 20.2448 17.6091 20.1441C17.3663 20.0435 17.1457 19.896 16.96 19.71L16.9 19.65C16.6643 19.4195 16.365 19.2648 16.0406 19.206C15.7162 19.1472 15.3816 19.1869 15.08 19.32C14.7842 19.4468 14.532 19.6572 14.3543 19.9255C14.1766 20.1938 14.0813 20.5082 14.08 20.83V21C14.08 21.5304 13.8693 22.0391 13.4942 22.4142C13.1191 22.7893 12.6104 23 12.08 23C11.5496 23 11.0409 22.7893 10.6658 22.4142C10.2907 22.0391 10.08 21.5304 10.08 21V20.91C10.0723 20.579 9.96512 20.258 9.77251 19.9887C9.5799 19.7194 9.31074 19.5143 9 19.4C8.69838 19.2669 8.36381 19.2272 8.03941 19.286C7.71502 19.3448 7.41568 19.4995 7.18 19.73L7.12 19.79C6.93425 19.976 6.71368 20.1235 6.47088 20.2241C6.22808 20.3248 5.96783 20.3766 5.705 20.3766C5.44217 20.3766 5.18192 20.3248 4.93912 20.2241C4.69632 20.1235 4.47575 19.976 4.29 19.79C4.10405 19.6043 3.95653 19.3837 3.85588 19.1409C3.75523 18.8981 3.70343 18.6378 3.70343 18.375C3.70343 18.1122 3.75523 17.8519 3.85588 17.6091C3.95653 17.3663 4.10405 17.1457 4.29 16.96L4.35 16.9C4.58054 16.6643 4.73519 16.365 4.794 16.0406C4.85282 15.7162 4.81312 15.3816 4.68 15.08C4.55324 14.7842 4.34276 14.532 4.07447 14.3543C3.80618 14.1766 3.49179 14.0813 3.17 14.08H3C2.46957 14.08 1.96086 13.8693 1.58579 13.4942C1.21071 13.1191 1 12.6104 1 12.08C1 11.5496 1.21071 11.0409 1.58579 10.6658C1.96086 10.2907 2.46957 10.08 3 10.08H3.09C3.42099 10.0723 3.742 9.96512 4.0113 9.77251C4.28059 9.5799 4.48572 9.31074 4.6 9C4.73312 8.69838 4.77282 8.36381 4.714 8.03941C4.65519 7.71502 4.50054 7.41568 4.27 7.18L4.21 7.12C4.02405 6.93425 3.87653 6.71368 3.77588 6.47088C3.67523 6.22808 3.62343 5.96783 3.62343 5.705C3.62343 5.44217 3.67523 5.18192 3.77588 4.93912C3.87653 4.69632 4.02405 4.47575 4.21 4.29C4.39575 4.10405 4.61632 3.95653 4.85912 3.85588C5.10192 3.75523 5.36217 3.70343 5.625 3.70343C5.88783 3.70343 6.14808 3.75523 6.39088 3.85588C6.63368 3.87653 6.85425 4.02405 7.04 4.21L7.1 4.35C7.33568 4.58054 7.63502 4.73519 7.95941 4.794C8.28381 4.85282 8.61838 4.81312 8.92 4.68H9C9.29577 4.55324 9.54802 4.34276 9.72569 4.07447C9.90337 3.80618 9.99872 3.49179 10 3.17V3C10 2.46957 10.2107 1.96086 10.5858 1.58579C10.9609 1.21071 11.4696 1 12 1C12.5304 1 13.0391 1.21071 13.4142 1.58579C13.7893 1.96086 14 2.46957 14 3V3.09C14.0013 3.41179 14.0966 3.72618 14.2743 3.99447C14.452 4.26276 14.7042 4.47324 15 4.6C15.3016 4.73312 15.6362 4.77282 15.9606 4.714C16.285 4.65519 16.5843 4.50054 16.82 4.27L16.88 4.21C17.0657 4.02405 17.2863 3.87653 17.5291 3.77588C17.7719 3.67523 18.0322 3.62343 18.295 3.62343C18.5578 3.62343 18.8181 3.67523 19.0609 3.77588C19.3037 3.87653 19.5243 4.02405 19.71 4.21C19.896 4.39575 20.0435 4.61632 20.1441 4.85912C20.2448 5.10192 20.2966 5.36217 20.2966 5.625C20.2966 5.88783 20.2448 6.14808 20.1441 6.39088C20.0435 6.63368 19.896 6.85425 19.71 7.04L19.65 7.1C19.4195 7.33568 19.2648 7.63502 19.206 7.95941C19.1472 8.28381 19.1869 8.61838 19.32 8.92V9C19.4468 9.29577 19.6572 9.54802 19.9255 9.72569C20.1938 9.90337 20.5082 9.99872 20.83 10H21C21.5304 10 22.0391 10.2107 22.4142 10.5858C22.7893 10.9609 23 11.4696 23 12C23 12.5304 22.7893 13.0391 22.4142 13.4142C22.0391 13.7893 21.5304 14 21 14H20.91C20.5882 14.0013 20.2738 14.0966 20.0055 14.2743C19.7372 14.452 19.5268 14.7042 19.4 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Smart Processing</h3>
+                        <p>Automatic quality selection and format optimization for the best results.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="video-details" class="video-details hidden">
+            <div class="container">
+                <div class="video-preview">
+                    <img id="video-thumbnail" src="" alt="Video thumbnail">
+                    <div class="video-info">
+                        <h3 id="video-title"></h3>
+                        <p id="video-duration"></p>
+                        <p id="video-author"></p>
+                    </div>
+                </div>
+                
+                <div class="format-selection">
+                    <div class="format-group">
+                        <h4>Select Format</h4>
+                        <div class="format-options">
+                            <div class="format-option">
+                                <input type="radio" id="mp4" name="format" value="mp4" checked>
+                                <label for="mp4" class="format-label">
+                                    <span class="format-icon">🎥</span>
+                                    MP4 Video
+                                    <small>Most Compatible</small>
+                                </label>
+                            </div>
+                            <div class="format-option">
+                                <input type="radio" id="mp3" name="format" value="mp3">
+                                <label for="mp3" class="format-label">
+                                    <span class="format-icon">🎵</span>
+                                    MP3 Audio
+                                    <small>Audio Only</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quality-group">
+                        <h4>Select Quality</h4>
+                        <div class="quality-options">
+                            <div class="quality-option">
+                                <input type="radio" id="high" name="quality" value="high" checked>
+                                <label for="high" class="quality-label">High Quality</label>
+                            </div>
+                            <div class="quality-option">
+                                <input type="radio" id="medium" name="quality" value="medium">
+                                <label for="medium" class="quality-label">Medium Quality</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="download-btn" onclick="startDownload()">
+                        <span class="btn-icon">📥</span>
+                        Download
+                    </button>
+                    <button class="transcript-btn" onclick="getTranscript()">
+                        <span class="btn-icon">📝</span>
+                        Get Transcript
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="download-progress" class="download-progress hidden">
+            <div class="container">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <p class="progress-text">Downloading... 0%</p>
+                <p class="progress-status">Starting download...</p>
+            </div>
+        </section>
+
+        <section id="video-processing" class="video-processing hidden">
+            <div class="container">
+                <div class="processing-card">
+                    <div class="processing-header">
+                        <h3>Processing Video</h3>
+                        <div class="processing-status">Analyzing video...</div>
+                    </div>
+                    
+                    <div class="video-preview">
+                        <div class="thumbnail-container">
+                            <div class="thumbnail-placeholder">
+                                <div class="loading-spinner"></div>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4 id="videoTitle">Loading title...</h4>
+                            <p id="videoDuration">Duration: --:--</p>
+                            <p id="videoQuality">Quality: Loading...</p>
+                        </div>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="progress-text">0%</div>
+                    </div>
+
+                    <div class="format-selection">
+                        <h4>Select Format</h4>
+                        <div class="format-options">
+                            <label class="format-option">
+                                <input type="radio" name="format" value="mp4" checked>
+                                <span class="format-label">
+                                    <span class="format-icon">🎥</span>
+                                    MP4
+                                    <span class="format-info">High Quality Video</span>
+                                </span>
+                            </label>
+                            <label class="format-option">
+                                <input type="radio" name="format" value="mp3">
+                                <span class="format-label">
+                                    <span class="format-icon">🎵</span>
+                                    MP3
+                                    <span class="format-info">Audio Only</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quality-selection">
+                        <h4>Select Quality</h4>
+                        <div class="quality-options">
+                            <label class="quality-option">
+                                <input type="radio" name="quality" value="high" checked>
+                                <span class="quality-label">
+                                    <span>High</span>
+                                    <span class="quality-info">1080p</span>
+                                </span>
+                            </label>
+                            <label class="quality-option">
+                                <input type="radio" name="quality" value="medium">
+                                <span class="quality-label">
+                                    <span>Medium</span>
+                                    <span class="quality-info">720p</span>
+                                </span>
+                            </label>
+                            <label class="quality-option">
+                                <input type="radio" name="quality" value="low">
+                                <span class="quality-label">
+                                    <span>Low</span>
+                                    <span class="quality-info">480p</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary download-btn" onclick="startDownload()">
+                            <span class="btn-icon">⬇️</span>
+                            Download
+                        </button>
+                        <button class="btn btn-outline transcript-btn" onclick="getTranscript()">
+                            <span class="btn-icon">📝</span>
+                            Get Transcript
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="pricing-section">
+            <div class="pricing-header">
+                <span class="badge">Pricing Plans</span>
+                <h2>Choose Your Perfect Plan</h2>
+                <p class="subtitle">Get started with our flexible pricing options</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="card-header">
+                        <h3>Basic</h3>
+                        <div class="price-container">
+                            <span class="currency">$</span>
+                            <span class="price">10</span>
+                            <span class="period">/month</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><span class="check">✓</span> 720p Video Quality</li>
+                            <li><span class="check">✓</span> Basic Video Effects</li>
+                            <li><span class="check">✓</span> 5GB Cloud Storage</li>
+                            <li><span class="check">✓</span> Email Support</li>
+                        </ul>
+                        <button class="plan-button">Get Started</button>
+                    </div>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="card-header">
+                        <h3>Standard</h3>
+                        <div class="price-container">
+                            <span class="currency">$</span>
+                            <span class="price">20</span>
+                            <span class="period">/month</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><span class="check">✓</span> 1080p Video Quality</li>
+                            <li><span class="check">✓</span> Advanced Effects</li>
+                            <li><span class="check">✓</span> 15GB Cloud Storage</li>
+                            <li><span class="check">✓</span> Priority Support</li>
+                            <li><span class="check">✓</span> Custom Watermark</li>
+                        </ul>
+                        <button class="plan-button popular-button">Get Started</button>
+                    </div>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="card-header">
+                        <h3>Premium</h3>
+                        <div class="price-container">
+                            <span class="currency">$</span>
+                            <span class="price">30</span>
+                            <span class="period">/month</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><span class="check">✓</span> 4K Video Quality</li>
+                            <li><span class="check">✓</span> Premium Effects</li>
+                            <li><span class="check">✓</span> 50GB Cloud Storage</li>
+                            <li><span class="check">✓</span> 24/7 Support</li>
+                            <li><span class="check">✓</span> Custom Branding</li>
+                            <li><span class="check">✓</span> API Access</li>
+                        </ul>
+                        <button class="plan-button">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            function processVideo() {
+                const url = document.getElementById('video-url').value;
+                if (!url) {
+                    showError('Please enter a valid video URL');
+                    return;
+                }
+
+                // Show processing section
+                document.getElementById('video-processing').classList.remove('hidden');
+                
+                // Simulate progress (this should be replaced with actual API calls)
+                simulateProgress();
+            }
+
+            function simulateProgress() {
+                let progress = 0;
+                const progressFill = document.querySelector('.progress-fill');
+                const progressText = document.querySelector('.progress-text');
+                const status = document.querySelector('.processing-status');
+
+                const interval = setInterval(() => {
+                    progress += 1;
+                    progressFill.style.width = `${progress}%`;
+                    progressText.textContent = `${progress}%`;
+
+                    if (progress < 30) {
+                        status.textContent = 'Analyzing video...';
+                    } else if (progress < 60) {
+                        status.textContent = 'Processing content...';
+                    } else if (progress < 90) {
+                        status.textContent = 'Preparing download...';
+                    }
+
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        status.textContent = 'Ready to download';
+                        document.querySelector('.download-btn').removeAttribute('disabled');
+                    }
+                }, 50);
+            }
+
+            function showError(message) {
+                // Create error toast
+                const toast = document.createElement('div');
+                toast.className = 'error-toast';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                // Remove toast after 3 seconds
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+            }
+        </script>
+
+        <section id="how-to" class="howto-container">
+            <div class="container">
+                <h2>How It Works</h2>
+                <div class="steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Paste URL</h3>
+                            <p>Copy and paste the video URL from any supported platform</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Choose Format</h3>
+                            <p>Select your preferred format and quality settings</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Download</h3>
+                            <p>Click download and get your video in seconds</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>What platforms are supported?</h3>
+                        <p>We support YouTube, Instagram, TikTok, and many more popular video platforms.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Is it free to use?</h3>
+                        <p>We offer both free and premium plans to suit your needs.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How accurate is the transcription?</h3>
+                        <p>Our AI-powered transcription achieves over 95% accuracy in most cases.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <img src="assets/logo.svg" alt="VideoFlow">
+                    VideoFlow
+                </a>
+                <p class="footer-description">
+                    Transform your video content with AI-powered processing and seamless downloads.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Twitter">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="GitHub">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#how-to">How It Works</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#docs">Documentation</a></li>
+                        <li><a href="#api">API Reference</a></li>
+                        <li><a href="#guides">Guides</a></li>
+                        <li><a href="#examples">Examples</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#cookies">Cookie Policy</a></li>
+                        <li><a href="#security">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-container">
+                <p class="copyright"> 2025 VideoFlow. All rights reserved.</p>
+                <div class="footer-extra">
+                    <select class="language-select" aria-label="Select language">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                    </select>
+                    <select class="theme-select" aria-label="Select theme">
+                        <option value="light">Light Mode</option>
+                        <option value="dark">Dark Mode</option>
+                        <option value="system">System Theme</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+            <div id="loginForm" class="auth-form">
+                <h2>Sign In</h2>
+                <div class="input-group">
+                    <input type="email" id="loginEmail" placeholder=" ">
+                    <label for="loginEmail">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="loginPassword" placeholder=" ">
+                    <label for="loginPassword">Password</label>
+                </div>
+                <button class="btn btn-primary" onclick="handleLogin()">Sign In</button>
+                <p class="auth-switch">Don't have an account? <a href="#" onclick="switchAuthForm('register')">Sign Up</a></p>
+            </div>
+            
+            <div id="registerForm" class="auth-form hidden">
+                <h2>Create Account</h2>
+                <div class="input-group">
+                    <input type="email" id="registerEmail" placeholder=" ">
+                    <label for="registerEmail">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="registerPassword" placeholder=" ">
+                    <label for="registerPassword">Password</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="confirmPassword" placeholder=" ">
+                    <label for="confirmPassword">Confirm Password</label>
+                </div>
+                <button class="btn btn-primary" onclick="handleRegister()">Sign Up</button>
+                <p class="auth-switch">Already have an account? <a href="#" onclick="switchAuthForm('login')">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auth Modal Functions
+        function openAuthModal(type) {
+            const modal = document.getElementById('authModal');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            
+            modal.style.display = 'flex';
+            if (type === 'login') {
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+            } else {
+                registerForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            }
+        }
+
+        function closeAuthModal() {
+            const modal = document.getElementById('authModal');
+            modal.style.display = 'none';
+        }
+
+        function switchAuthForm(type) {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            
+            if (type === 'login') {
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+            } else {
+                registerForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('authModal');
+            if (event.target === modal) {
+                closeAuthModal();
+            }
+        }
+    </script>
+
+    <!-- Success Animation -->
+    <div id="success-animation" class="success-animation hidden">
+        <div class="checkmark">✓</div>
+        <p>Download started!</p>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <span id="notification-message"></span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
